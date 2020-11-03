@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  lora:
+    build:
+      context: ../
+      dockerfile: ./container/Dockerfile
+    container_name: lora
+    restart: always
+    ports:
+      - "1700:1700"
+      - "8080:8080"
