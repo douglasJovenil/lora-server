@@ -7,6 +7,7 @@ services:
       dockerfile: ./container/Dockerfile
     container_name: lora
     restart: always
+    tty: true
     ports:
-      - "1700:1700"
+      - "1700:1700/udp"
       - "8080:8080"

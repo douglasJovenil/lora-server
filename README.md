@@ -6,6 +6,7 @@ Helps to create a docker image of a LoRa Server.
 git clone https://github.com/douglasJovenil/lora-server
 cd lora-server/container
 docker-compose build
+sudo systemctl stop chirpstack-gateway-bridge && sudo systemctl stop chirpstack-network-server && sudo systemctl stop chirpstack-application-server
 ```
 
 # Dependencies
@@ -23,6 +24,10 @@ sudo apt-get install chirpstack-gateway-bridge chirpstack-network-server chirpst
 ```
 sudo systemctl start chirpstack-gateway-bridge
 sudo systemctl status chirpstack-gateway-bridge
+
+/etc/init.d/chirpstack-gateway-bridge start
+/etc/init.d/chirpstack-gateway-bridge status
+tail -f /var/log/chirpstack-gateway-bridge/chirpstack-gateway-bridge.log
 ```
 **Open port 1700 on your Firewall as UDP**
 
@@ -35,12 +40,16 @@ create database loraserver_ns with owner loraserver_ns;
 psql -h localhost -U loraserver_ns -W loraserver_ns
 
 sudo -s
-sudo chirpstack-network-server configfile > etc/chirpstack-network-server/chirpstack-network-server.toml
+sudo chirpstack-network-server configfile > /etc/chirpstack-network-server/chirpstack-network-server.toml
 sudo nano /etc/chirpstack-network-server/chirpstack-network-server.toml # Change the dsn to postgres://loraserver_ns:dbpassword@localhost/loraserver_ns?sslmode=disable
 exit
 
 sudo systemctl start chirpstack-network-server 
 sudo systemctl status chirpstack-network-server 
+
+/etc/init.d/chirpstack-network-server start
+/etc/init.d/chirpstack-network-server status
+tail -f /var/log/chirpstack-network-server/chirpstack-network-server.log
 ```
 
 ## Setup Application
@@ -61,6 +70,9 @@ openssl rand -base64 32 | paste the result at jwt_secret on file chirpstack-netw
 
 sudo systemctl start chirpstack-application-server
 sudo systemctl status chirpstack-application-server
+
+/etc/init.d/chirpstack-application-server start
+/etc/init.d/chirpstack-application-server status
 ```
 **Open port 8080 on your Firewall as TCP**
 **user**: admin
