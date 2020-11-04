@@ -4,13 +4,17 @@ Helps to create a docker image of a LoRa Server based on [ChirpStack](https://ww
 
 ## 💻 Project
 
-#### Login Screen
+#### Building Project
 
-![Login Screen](docs/images/00_login_screen.png)
+![Building Project](docs/images/02_building_project.png)
 
-#### Dashboard
+#### Build Done
 
-![Dashboard](docs/images/01_dashboard.png)
+![Build Done](docs/images/03_build_done.png)
+
+#### Start and Check Server
+
+![Start and Check Server](docs/images/04_start_and_check.png)
 
 ## 🚀 Technologies
 
@@ -46,7 +50,7 @@ Access the address **localhost:8080**
 
 ![Login Screen](docs/images/00_login_screen.png)
 
-And insert the following credentials:
+Insert the following credentials:
 
 * **user**: admin
 * **password**: admin
