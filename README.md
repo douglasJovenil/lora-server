@@ -1,6 +1,6 @@
 # LoRa Server
 
-Helps to create a docker image of a LoRa Server based on [ChirpStack](https://www.chirpstack.io/) using the Semtech protocol and the band frequency of AU915
+Helps to create a docker container of a LoRa Server based on [ChirpStack](https://www.chirpstack.io/) using the Semtech protocol and the band frequency of AU915
 
 ## 💻 Project
 
@@ -12,7 +12,7 @@ Helps to create a docker image of a LoRa Server based on [ChirpStack](https://ww
 
 ![Build Done](docs/images/03_build_done.png)
 
-#### Starting and Checkink the Server
+#### Starting and Checking the Server
 
 ![Start and Check Server](docs/images/04_start_and_check.png)
 
@@ -42,6 +42,32 @@ Now to run:
 docker-compose up -d
 ```
 
+You can also show the logs of each application:
+
+* chirpstack-gateway-bridge
+
+  
+
+``` 
+  tail -f /var/log/chirpstack-gateway-bridge/chirpstack-gateway-bridge.log
+  ```
+
+* chirpstack-network-server
+
+  
+
+``` 
+  tail -f /var/log/chirpstack-network-server/chirpstack-network-server.log
+  ```
+
+* chirpstack-application-server
+
+  
+
+``` 
+  tail -f /var/log/chirpstack-application-server/chirpstack-application-server.log
+  ```
+
 **IMPORTANT**: remember to open the port **1700/udp** and **8080/tcp** on your **firewall**.
 
 ## ⚙️ Setup
@@ -59,20 +85,38 @@ If there are no problems, you will be redirect to dashboard
 
 ![Dashboard](docs/images/01_dashboard.png)
 
-### Creating a Network Server
+* chirpstack-application-server
 
-Click on **Network-server** then **ADD**
+  
 
-![Selecting Network Server](docs/images/05_select_network_server.png)
+``` 
 
-On this screen we have to fill the fields
+  ```
 
-* **Network-server name**: any name that you will use to identify the server
-* **Network-server host**: the address of the machine that is running the chirpstack-network-server application, in this case this application is on same machine of chirpstack-application-server so we can just use **127.0.0.1:8000** 
+* chirpstack-application-server
 
-With this field filled just click on **ADD NETWORK SERVER**
+  
 
-![Inserting the Network Server Data](docs/images/06_insert_network_server_data.png)
+``` 
+
+* chirpstack-application-server
+
+  ```
+
+  
+
+``` 
+
+  + chirpstack-application-server
+
+  ```
+
+    ``
+
+  
+  
+
+``` 
 
 ### Creating a Service Profile
 
@@ -82,11 +126,14 @@ Click on **Service-profiles** then **CREATE**
 
 On this screen we have to fill:
 
-* **Service-profile name**: any name that you will use to identify this service
-* **Network-server**: the LoRa server that we created on previous step
-* **Maximum allowed data rate**: This field we set to **5**, this value respect the Semtech protocol
+* **Service- chirpstack-application-server
 
-And check the field:
+  ```
+
+  And check the field:
+  ```-profile name**: any name that you will use to identify this service
+
+* **Maximum allowed data rate**: This field we set to **5**, this value respect the Semtech protocol
 
 * **Add gateway meta-data**: adds information of gateway to the package
 
@@ -102,11 +149,15 @@ Click on **Device-profiles** then **CREATE**
 
 We will have to fill:
 
-* **Device-profile name**: any name that you will use to identify this type of device
-* **Network-server**: the LoRa server that we created on the first step
+* **Device-- chirpstack-application-server
+
+  ```
+
+  + **Uplink interval (seconds)**: interval between uplinks
+
+  ```profile name**: any name that you will use to identify this type of device
+
 * **LoRaWAN MAC version**: if you will follow this documentation, just use 1.0.2
-* **LoRaWAN Regional Parameters revision**: type of your LoRa device.
-* **Uplink interval (seconds)**: interval between uplinks
 
 Then click on **JOIN (OTAA/ABP)**
 
