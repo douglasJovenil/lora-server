@@ -10,8 +10,14 @@ services:
       dockerfile: ./container/Dockerfile
     volumes:
       - postgresql:/var/lib/postgresql/13/main
+      - chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+      - chirpstack-network-server:/etc/chirpstack-network-server
+      - chirpstack-application-server:/etc/chirpstack-application-server
     ports:
       - "1700:1700/udp"
       - "8080:8080"
 volumes:
   postgresql:
+  chirpstack-gateway-bridge:
+  chirpstack-network-server:
+  chirpstack-application-server:

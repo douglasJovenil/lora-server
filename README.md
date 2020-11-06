@@ -1,6 +1,6 @@
 # LoRa Server
 
-Helps to create a docker container of a LoRa Server based on [ChirpStack](https://www.chirpstack.io/) using the Semtech protocol and the band frequency of AU915
+Helps to create a docker image of a LoRa Server based on [ChirpStack](https://www.chirpstack.io/) using the Semtech protocol and the band frequency of AU915
 
 ## 💻 Project
 
@@ -12,7 +12,7 @@ Helps to create a docker container of a LoRa Server based on [ChirpStack](https:
 
 ![Build Done](docs/images/03_build_done.png)
 
-#### Starting and Checking the Server
+#### Starting and Checkink the Server
 
 ![Start and Check Server](docs/images/04_start_and_check.png)
 
@@ -29,7 +29,6 @@ Helps to create a docker container of a LoRa Server based on [ChirpStack](https:
 Before you start the server theres some commands that you have to run, just copy and paste one by one the commands bellow:
 
 ``` 
-
 git clone https://github.com/douglasJovenil/lora-server
 cd lora-server/container
 docker-compose build
@@ -38,35 +37,21 @@ docker-compose build
 Now to run:
 
 ``` 
-
 docker-compose up -d
 ```
 
 You can also show the logs of each application:
-
-* chirpstack-gateway-bridge
-
-  
-
-``` 
+- chirpstack-gateway-bridge
+  ``` 
   tail -f /var/log/chirpstack-gateway-bridge/chirpstack-gateway-bridge.log
   ```
-
-* chirpstack-network-server
-
-  
-
-``` 
+- chirpstack-network-server
+  ``` 
   tail -f /var/log/chirpstack-network-server/chirpstack-network-server.log
   ```
-
-* chirpstack-application-server
-
-  
-
-``` 
+- chirpstack-application-server
+  ``` 
   tail -f /var/log/chirpstack-application-server/chirpstack-application-server.log
-  ```
 
 **IMPORTANT**: remember to open the port **1700/udp** and **8080/tcp** on your **firewall**.
 
@@ -78,45 +63,27 @@ Access the address **localhost:8080** on your web browser
 
 Insert the following credentials:
 
-* **user**: admin
-* **password**: admin
+- **user**: admin
+- **password**: admin
 
 If there are no problems, you will be redirect to dashboard
 
 ![Dashboard](docs/images/01_dashboard.png)
 
-* chirpstack-application-server
+### Creating a Network Server
 
-  
+Click on **Network-server** then **ADD**
 
-``` 
+![Selecting Network Server](docs/images/05_select_network_server.png)
 
-  ```
+On this screen we have to fill the fields
 
-* chirpstack-application-server
+- **Network-server name**: any name that you will use to identify the server
+- **Network-server host**: the address of the machine that is running the chirpstack-network-server application, in this case this application is on same machine of chirpstack-application-server so we can just use **127.0.0.1:8000** 
 
-  
+With this field filled just click on **ADD NETWORK SERVER**
 
-``` 
-
-* chirpstack-application-server
-
-  ```
-
-  
-
-``` 
-
-  + chirpstack-application-server
-
-  ```
-
-    ``
-
-  
-  
-
-``` 
+![Inserting the Network Server Data](docs/images/06_insert_network_server_data.png)
 
 ### Creating a Service Profile
 
@@ -126,16 +93,13 @@ Click on **Service-profiles** then **CREATE**
 
 On this screen we have to fill:
 
-* **Service- chirpstack-application-server
+- **Service-profile name**: any name that you will use to identify this service
+- **Network-server**: the LoRa server that we created on previous step
+- **Maximum allowed data rate**: This field we set to **5**, this value respect the Semtech protocol
 
-  ```
+And check the field:
 
-  And check the field:
-  ```-profile name**: any name that you will use to identify this service
-
-* **Maximum allowed data rate**: This field we set to **5**, this value respect the Semtech protocol
-
-* **Add gateway meta-data**: adds information of gateway to the package
+- **Add gateway meta-data**: adds information of gateway to the package
 
 Then click on **CREATE SERVICE-PROFILE**
 
@@ -149,15 +113,11 @@ Click on **Device-profiles** then **CREATE**
 
 We will have to fill:
 
-* **Device-- chirpstack-application-server
-
-  ```
-
-  + **Uplink interval (seconds)**: interval between uplinks
-
-  ```profile name**: any name that you will use to identify this type of device
-
-* **LoRaWAN MAC version**: if you will follow this documentation, just use 1.0.2
+- **Device-profile name**: any name that you will use to identify this type of device
+- **Network-server**: the LoRa server that we created on the first step
+- **LoRaWAN MAC version**: if you will follow this documentation, just use 1.0.2
+- **LoRaWAN Regional Parameters revision**: type of your LoRa device.
+- **Uplink interval (seconds)**: interval between uplinks
 
 Then click on **JOIN (OTAA/ABP)**
 
@@ -179,12 +139,12 @@ Click on **Gateways** then **CREATE**
 
 On this screen fill the fields:
 
-* **Gateway name**: any name that you will use to identify this gateway
-* **Gateway description**: any description to specify this gateway
-* **Gateway ID**: MAC address of your gateway
-* **Networkserver**: the LoRa server that you created on first step
-* **Gateway altitude (meters)**: any value, this will be update on first uplink
-* **Gateway location**: local where your gateways is
+- **Gateway name**: any name that you will use to identify this gateway
+- **Gateway description**: any description to specify this gateway
+- **Gateway ID**: MAC address of your gateway
+- **Networkserver**: the LoRa server that you created on first step
+- **Gateway altitude (meters)**: any value, this will be update on first uplink
+- **Gateway location**: local where your gateways is
 
 Then click on **CREATE GATEWAY**
 
@@ -198,9 +158,9 @@ Click on **Applications** then **CREATE**
 
 On this screen fill the fields:
 
-* **Application name**: any name that you will use to identify this application
-* **Application description**: any description to specify this application
-* **Service-profile**: service that you created previously
+- **Application name**: any name that you will use to identify this application
+- **Application description**: any description to specify this application
+- **Service-profile**: service that you created previously
 
 then click on **CREATE APPLICATION**
 
@@ -218,15 +178,15 @@ Then **CREATE**
 
 On this screen fill the fields:
 
-* **Device name**: any name that you will use to identify this device
-* **Device description**: any description to specify this device
-* **Device-profile**: profile that you created previously
+- **Device name**: any name that you will use to identify this device
+- **Device description**: any description to specify this device
+- **Device-profile**: profile that you created previously
 
 The field **Device EUI** select **LSB** and click on **refresh** icon to generate a Device EUI.
 
 Check the following fields:
 
-* **Disable frame-counter validation**: only when you are testing the device
+- **Disable frame-counter validation**: only when you are testing the device
 
 ![Selecting Create Device](docs/images/19_insert_device_data.png)
 
