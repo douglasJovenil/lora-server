@@ -31,7 +31,7 @@ Before you start the server theres some commands that you have to run, just copy
 ``` 
 git clone https://github.com/douglasJovenil/lora-server
 cd lora-server/container
-docker-compose build
+sudo docker-compose build
 ```
 
 Now to run:
