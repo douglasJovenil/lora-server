@@ -58,6 +58,10 @@ You can also show the logs of each application:
 
 **IMPORTANT**: remember to open the port **1700/udp** and **8080/tcp** on your **firewall**.
 
+## 📙 Useful Documents
+- [Frequency Plans](https://www.thethingsnetwork.org/docs/lorawan/frequency-plans.html)
+- [LoRaWAN Frequency Plans and Regulations by Country](https://www.thethingsnetwork.org/docs/lorawan/frequencies-by-country.html)
+
 ## ⚙️ Setup
 
 Access the address **localhost:8080** on your web browser
