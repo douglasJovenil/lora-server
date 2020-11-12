@@ -131,6 +131,24 @@ Select **Custom JavaScript codec functions**, with this you can just write any f
 
 ![Writting Codec](docs/images/12_writting_codec.png)
 
+In this codec that I made, I just make the conversion of hex to char and then join the array, if you want do the same thing, use the following code:
+```
+function Decode(fPort, bytes, variables) {
+  var decoded = [];
+  
+  for (var i = 0; i < bytes.length; i++) {
+  	var decodedChar = String.fromCharCode(bytes[i]);
+    decoded.push(decodedChar);
+  }
+  
+  return {'payload': decoded.join('')};
+}
+```
+
+As result, you have this kind of package when observe the device data: 
+
+![Codec Result](docs/images/22_codec_result.png)
+
 ### Creating a Gateway
 
 Click on **Gateways** then **CREATE**
@@ -182,7 +200,7 @@ On this screen fill the fields:
 - **Device description**: any description to specify this device
 - **Device-profile**: profile that you created previously
 
-The field **Device EUI** select **LSB** and click on **refresh** icon to generate a Device EUI.
+In the field **Device EUI** select **MSB** (if you will use my device library, other wise use LSB) and click on **refresh** icon to generate a Device EUI.
 
 Check the following fields:
 
@@ -197,3 +215,7 @@ Now select the device
 Click on **Keys (OTAA)**, click on both **refresh icons** to create **Application key** and **Gen Application Key** then **SET DEVICE-KEYS**. You will use this keys to setup your hardware.
 
 ![Setting Device Keys](docs/images/21_create_device_keys.png)
+
+Your device is done, if you desire to watch the data on your device just click on **DEVICE DATA**
+
+![Observe Data](docs/images/23_observe_data.png)
